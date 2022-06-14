@@ -4,10 +4,6 @@ import Foundation
   
   @objc static let shared = EventToJS()
   var eventToJSBridge: EventToJSBridge?
-  
-  override init() {
-    super.init()
-  }
    
   @objc func registerNativeModule(bridge: EventToJSBridge) {
     self.eventToJSBridge = bridge;
