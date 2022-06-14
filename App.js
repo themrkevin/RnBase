@@ -14,7 +14,6 @@ import {
   SafeAreaView,
   ScrollView,
   StatusBar,
-  StyleSheet,
   Text,
   useColorScheme,
   View,
@@ -37,11 +36,17 @@ class App extends Component<Props> {
     super(props)
   }
 
+  handleEventThing = (data) => {
+    Alert.alert(data.message)
+    console.log(data.message)
+  }
+
   componentDidMount () {
-    NativeEvent.addEventListener('customEvent', (data) => {
-      Alert.alert(data.message)
-      console.log(data.message)
-    })
+    NativeEvent.addEventListener('customEvent', this.handleEventThing)
+  }
+
+  componentWillUnmount () {
+    NativeEvent.removeEventListener('customEvent', this.handleEventThing)
   }
 
   render () {
@@ -54,24 +59,5 @@ class App extends Component<Props> {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
